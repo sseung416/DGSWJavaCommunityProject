@@ -2,23 +2,18 @@ package kr.hs.dgsw.java.community.controller;
 
 import kr.hs.dgsw.java.community.domain.Post;
 import kr.hs.dgsw.java.community.mapper.CommunityMapper;
-import kr.hs.dgsw.java.community.service.CommunityService;
-import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class CommunityController {
-
-    @Autowired
-    private CommunityService communityService;
 
     @Autowired
     private CommunityMapper communityMapper;
@@ -33,8 +28,43 @@ public class CommunityController {
     }
 
     @RequestMapping("/detail/{idx}")
-    public String postDetail(@PathVariable("idx") int idx, Model model) {
+    public String postDetail(@PathVariable("idx") Integer idx, Model model) {
+        Post post = communityMapper.getPost(idx);
+        model.addAttribute("post", post);
         return "post-detail";
+    }
+
+    @GetMapping("/write")
+    public String write(@RequestParam(value = "idx", required = false) Integer idx, Model model) {
+        // @RequestParam 에 int 값 넣으면 url 에서 null 반환함 -> Integer 로 변경
+        Post post;
+
+        if (idx == null) {
+            post = new Post();
+        } else {
+            post = communityMapper.getPost(idx);
+        }
+
+        model.addAttribute("post", post);
+
+        return "write";
+    }
+
+    @RequestMapping("/write/fin")
+    public String writeFinish(Post post) {
+        Calendar cal = Calendar.getInstance();
+        java.sql.Date writeDate = new java.sql.Date(cal.getTimeInMillis());
+
+        communityMapper.insert(
+                post.getTitle(),
+                post.getContent(),
+                post.getWriter(),
+                writeDate
+        );
+
+        // 대충 오류 처리
+
+        return "redirect:/";
     }
 
 //    @PutMapping("/{idx}")

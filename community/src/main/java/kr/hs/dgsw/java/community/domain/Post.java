@@ -4,13 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mybatis.annotations.Entity;
+import org.springframework.data.mybatis.annotations.Id;
+
+import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Post {
-    private int idx;
+    @Id
+    private Integer idx;
 
     private String title;
 
@@ -18,5 +24,5 @@ public class Post {
 
     private String writer;
 
-    private String writeTime;
+    private Date writeTime;
 }

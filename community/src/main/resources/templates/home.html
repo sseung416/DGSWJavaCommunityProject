@@ -8,7 +8,8 @@
 <body>
     <div>
         <h2>게시판</h2>
-        <div th:insert="~{insert :: insert}"></div>
+        <a href="/write"><button type="submit" th:action="@{/write}">글쓰기</button></a>
+
         <ul>
             <li th:each="post: ${postList}">
                 <div class="box"
