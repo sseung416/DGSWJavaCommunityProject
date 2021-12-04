@@ -52,28 +52,35 @@ public class CommunityController {
 
     @RequestMapping("/write/fin")
     public String writeFinish(Post post) {
+        System.out.println(post.getIdx());
+
         Calendar cal = Calendar.getInstance();
         java.sql.Date writeDate = new java.sql.Date(cal.getTimeInMillis());
 
-        communityMapper.insert(
-                post.getTitle(),
-                post.getContent(),
-                post.getWriter(),
-                writeDate
-        );
+        if (post.getIdx() == null) {
+            communityMapper.insert(
+                    post.getTitle(),
+                    post.getContent(),
+                    post.getWriter(),
+                    writeDate
+            );
+        } else {
+            communityMapper.update(
+                    post.getIdx(),
+                    post.getTitle(),
+                    post.getContent(),
+                    post.getWriter()
+            );
+        }
 
-        // 대충 오류 처리
+        // todo 대충 오류 처리
 
         return "redirect:/";
     }
 
-//    @PutMapping("/{idx}")
-//    public RequestEntity<?> putPost(@PathVariable("idx") int idx, @RequestBody Post post) {
-//        return new RequestEntity<Post>("{}", HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/{idx}")
-//    public RequestEntity<?> deletePost(@PathVariable("idx") int idx) {
-//        return new RequestEntity<>("{}", HttpStatus.OK);
-//    }
+    @RequestMapping("/delete")
+    public String delete(@RequestParam(value = "idx") Integer idx) {
+        communityMapper.delete(idx);
+        return "redirect:/";
+    }
 }

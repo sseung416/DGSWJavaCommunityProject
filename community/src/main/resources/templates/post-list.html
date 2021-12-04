@@ -13,8 +13,11 @@
         <span th:text="${post.writer}"></span><br/>
         <span th:text="${post.writeTime}"></span><br/>
         <div>
-            <button class="main-button">상세보기</button>
-            <button class="main-button">수정</button>
+            <a href="/post-detail"><button class="main-button">상세보기</button></a>
+            <form method="get" th:action="@{/write}">
+                <input type="hidden" name="idx" th:value="${post.idx}">
+                <button class="main-button">수정</button>
+            </form>
             <button class="main-button">삭제</button>
         </div>
     </div>

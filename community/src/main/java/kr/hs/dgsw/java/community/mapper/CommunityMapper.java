@@ -24,13 +24,16 @@ public interface CommunityMapper {
             @Param("write_time") Date writeTime
     );
 
-    @Update("UPDATE writing SET ")
+    @Update("UPDATE writing SET " +
+            "content = #{content}, title = #{title}, writer = #{writer}" +
+            "WHERE idx = #{idx};")
     void update(
+            @Param("idx") Integer idx,
             @Param("content") String content,
             @Param("title") String title,
             @Param("writer") String writer
     );
 
-    @Delete("")
-    void delete();
+    @Delete("DELETE FROM writing WHERE idx = ${idx};")
+    void delete(@Param("idx") Integer idx);
 }
