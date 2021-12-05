@@ -4,18 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판</title>
+    <style>
+        * {
+            background-color: rgb(234, 224, 238);
+            text-align: center;
+        }
+
+        body {
+            padding: 0 200px 0 200px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .attribute {
+            font-weight: bold;
+        }
+
+        .bold-hr {
+            color: rgb(240, 145, 186);
+            border: thin solid;
+            margin: 32px 0 32px 0;
+        }
+
+        .normal-hr {
+            border: thin solid;
+            color: black
+            margin: 16px 0 16px 0;
+        }
+
+<!--        .row {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--        }-->
+
+        .main-button {
+            padding: 8px 16px 8px 16px;
+            border: 0px;
+        }
+
+        .main-button:hover {
+            border-radius: 60%;
+            background: rgb(240, 145, 186);
+        }
+
+        #write-button {
+            text-align: end;
+        }
+
+        /*  */
+        .post-idx {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .post-title {
+            padding-right: 100px;
+        }
+
+        .post-writer {
+            padding-right: 30px;
+        }
+
+        .post-write-time {
+
+        }
+    </style>
 </head>
 <body>
     <div>
         <h2>게시판</h2>
-        <a href="/write"><button type="submit" th:action="@{/write}">글쓰기</button></a>
-
+        <a href="/write">
+            <button class="main-button" id="write-btn"
+                    type="submit" th:action="@{/write}">글쓰기</button></a>
+        <hr class="bold-hr">
         <ul>
+            <li class="row">
+                <span class="attribute post-idx">번호</span>
+                <span class="attribute post-title">제목</span>
+                <span class="attribute post-writer">작성자</span>
+                <span class="attribute post-write-time">일시</span>
+            </li>
             <li th:each="post: ${postList}">
-                <div class="box"
+                <hr class="normal-hr">
+                <div class="row"
                      th:replace="~{post-list :: post(${post})}"></div>
             </li>
         </ul>
+        <hr class="bold-hr">
     </div>
 </body>
 </html>

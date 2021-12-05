@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    </style>
 </head>
 <body>
-    <div class="list-item" th:fragment="post(post)">
-        <span th:text="${post.idx}"></span><br/>
-        <span th:text="${post.title}"></span><br/>
-        <span th:text="${post.content}"></span><br/>
-        <span th:text="${post.writer}"></span><br/>
-        <span th:text="${post.writeTime}"></span><br/>
+    <div class="row" th:fragment="post(post)">
+        <span class="post-idx" th:text="${post.idx}"></span>
+        <span class="post-title" th:text="${post.title}"></span>
+        <span class="post-writer" th:text="${post.writer}"></span>
+        <span class="post-write-time" th:text="${post.writeTime}"></span><br/>
 
-        <div>
-            <a href="/post-detail"><button class="main-button">상세보기</button></a>
-            <form method="get" th:action="@{/write}">
-                <input type="hidden" name="idx" th:value="${post.idx}">
-                <button class="main-button">수정</button>
-            </form>
-            <form method="get" th:action="@{/delete}">
-                <input type="hidden" name="idx" th:value="${post.idx}">
-                <button class="main-button">삭제</button>
-            </form>
-        </div>
-
+<!--        <div>-->
+<!--            <a href="/post-detail"><button class="main-button">상세보기</button></a>-->
+<!--            <form method="get" th:action="@{/write}">-->
+<!--                <input type="hidden" name="idx" th:value="${post.idx}">-->
+<!--                <button class="main-button">수정</button>-->
+<!--            </form>-->
+<!--            <form method="get" th:action="@{/delete}">-->
+<!--                <input type="hidden" name="idx" th:value="${post.idx}">-->
+<!--                <button class="main-button">삭제</button>-->
+<!--            </form>-->
+<!--        </div>-->
     </div>
 </body>
 </html>
