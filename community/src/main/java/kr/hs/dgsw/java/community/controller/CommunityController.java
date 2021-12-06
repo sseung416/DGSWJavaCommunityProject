@@ -65,8 +65,8 @@ public class CommunityController {
         } else {
             communityMapper.update(
                     post.getIdx(),
-                    post.getTitle(),
                     post.getContent(),
+                    post.getTitle(),
                     post.getWriter()
             );
         }
