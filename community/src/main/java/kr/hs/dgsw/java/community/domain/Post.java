@@ -24,5 +24,5 @@ public class Post {
 
     private String writer;
 
-    private Date writeTime;
+    private Date write_time;
 }

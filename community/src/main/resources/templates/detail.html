@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글</title>
+    <link style="stylesheet" href="main.css">
+    <style>
+        * {
+            background-color: rgb(234, 224, 238);
+            text-align: center;
+        }
+
+        body {
+            padding: 150px 200px 0 200px;
+        }
+
+        input {
+            height: 8px;
+        }
+
+        .button-box {
+            display: flex;
+        }
+
+        .main-button {
+            padding: 8px 16px 8px 16px;
+            border: 1px solid rgb(240, 145, 186);
+            border-radius: 30px;
+            width: 100px;
+            margin: 32px auto 0 auto;
+            color: rgb(240, 145, 186);
+        }
+
+        .main-button:hover {
+            border-radius: 30px;
+            background: rgb(240, 145, 186);
+            color: white;
+        }
+
+        table {
+            margin: 0 auto 0 auto;
+        }
+
+        tr {
+            display: block;
+            float: left;
+            padding-right: 16px;
+        }
+
+        th, td {
+            display: block;
+            padding: 8px 0 8px 0;
+        }
+
+        th {
+            color: rgb(240, 145, 186);
+        }
+
+        td {
+            width: 400px;
+        }
+
+        #content-th, #content-td {
+            height: 200px;
+        }
+
+        #content-td {
+            border-radius: 8px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th id="content-th">내용</th>
+            <th>작성자</th>
+            <th>작성일시</th>
+        </tr>
+        <tr>
+            <td th:text="${post.idx}"></td>
+            <td th:text="${post.title}"></td>
+            <td id="content-td" th:text="${post.content}"></td>
+            <td th:text="${post.writer}"></td>
+            <td th:text="${post.write_time}"></td>
+        </tr>
+    </table>
+
+    <div id="button-box">
+        <form method="get" th:action="@{/write}">
+            <input type="hidden" name="idx" th:value="${post.idx}">
+            <button class="main-button">수정</button>
+        </form>
+        <form method="get" th:action="@{/delete}">
+            <input type="hidden" name="idx" th:value="${post.idx}">
+            <button class="main-button">삭제</button>
+        </form>
+    </div>
+</body>
+</html>

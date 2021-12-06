@@ -14,61 +14,42 @@
             padding: 0 200px 0 200px;
         }
 
-        ul {
-            list-style: none;
+        table {
+            border: 0;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 80%;
+            margin: auto;
         }
 
-        .attribute {
-            font-weight: bold;
+        th {
+            border: 0;
+            color: white;
+            background: rgb(240, 145, 186);
+            padding-top: 16px;
+            padding-bottom: 16px;
         }
 
-        .bold-hr {
-            color: rgb(240, 145, 186);
-            border: thin solid;
-            margin: 32px 0 32px 0;
+        td {
+            border: 0;
+            border-bottom: solid 1px rgb(240, 145, 186);
+            padding-top: 16px;
+            padding-bottom: 16px;
         }
-
-        .normal-hr {
-            border: thin solid;
-            color: black
-            margin: 16px 0 16px 0;
-        }
-
-<!--        .row {-->
-<!--            display: flex;-->
-<!--            justify-content: space-between;-->
-<!--        }-->
 
         .main-button {
             padding: 8px 16px 8px 16px;
-            border: 0px;
+            border: 1px solid rgb(240, 145, 186);
+            border-radius: 30px;
+            width: 100px;
+            margin: 0 auto 16px auto;
+            color: rgb(240, 145, 186);
         }
 
         .main-button:hover {
-            border-radius: 60%;
+            border-radius: 30px;
             background: rgb(240, 145, 186);
-        }
-
-        #write-button {
-            text-align: end;
-        }
-
-        /*  */
-        .post-idx {
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-
-        .post-title {
-            padding-right: 100px;
-        }
-
-        .post-writer {
-            padding-right: 30px;
-        }
-
-        .post-write-time {
-
+            color: white;
         }
     </style>
 </head>
@@ -78,21 +59,17 @@
         <a href="/write">
             <button class="main-button" id="write-btn"
                     type="submit" th:action="@{/write}">글쓰기</button></a>
-        <hr class="bold-hr">
-        <ul>
-            <li class="row">
-                <span class="attribute post-idx">번호</span>
-                <span class="attribute post-title">제목</span>
-                <span class="attribute post-writer">작성자</span>
-                <span class="attribute post-write-time">일시</span>
-            </li>
-            <li th:each="post: ${postList}">
-                <hr class="normal-hr">
-                <div class="row"
-                     th:replace="~{post-list :: post(${post})}"></div>
-            </li>
-        </ul>
-        <hr class="bold-hr">
+        <table border="1">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>일시</th>
+
+            <th:block th:each="post: ${postList}">
+                <tr th:replace="~{post-list :: post(${post})}"></tr>
+            </th:block>
+        </table>
+
     </div>
 </body>
 </html>

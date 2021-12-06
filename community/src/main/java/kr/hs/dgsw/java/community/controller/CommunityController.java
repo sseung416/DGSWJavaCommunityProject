@@ -25,11 +25,13 @@ public class CommunityController {
         return "home";
     }
 
-    @RequestMapping("/detail/{idx}")
-    public String postDetail(@PathVariable("idx") Integer idx, Model model) {
+    @RequestMapping("/detail")
+    public String postDetail(@RequestParam(value = "idx") Integer idx, Model model) {
         Post post = communityMapper.getPost(idx);
+
         model.addAttribute("post", post);
-        return "post-detail";
+
+        return "detail";
     }
 
     @GetMapping("/write")
@@ -70,8 +72,6 @@ public class CommunityController {
                     post.getWriter()
             );
         }
-
-        // todo 대충 오류 처리
 
         return "redirect:/";
     }

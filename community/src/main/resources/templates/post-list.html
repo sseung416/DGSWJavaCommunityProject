@@ -5,26 +5,26 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        tr {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        tr:hover td {
+            background: rgb(240, 145, 186);
+        }
+
+        td {
+            background: white;
+        }
     </style>
 </head>
 <body>
-    <div class="row" th:fragment="post(post)">
-        <span class="post-idx" th:text="${post.idx}"></span>
-        <span class="post-title" th:text="${post.title}"></span>
-        <span class="post-writer" th:text="${post.writer}"></span>
-        <span class="post-write-time" th:text="${post.writeTime}"></span><br/>
-
-<!--        <div>-->
-<!--            <a href="/post-detail"><button class="main-button">상세보기</button></a>-->
-<!--            <form method="get" th:action="@{/write}">-->
-<!--                <input type="hidden" name="idx" th:value="${post.idx}">-->
-<!--                <button class="main-button">수정</button>-->
-<!--            </form>-->
-<!--            <form method="get" th:action="@{/delete}">-->
-<!--                <input type="hidden" name="idx" th:value="${post.idx}">-->
-<!--                <button class="main-button">삭제</button>-->
-<!--            </form>-->
-<!--        </div>-->
-    </div>
+    <tr class="row" th:onclick="|window.location.href='/detail?idx=${post.idx}'|" th:fragment="post(post)">
+        <td class="post-idx" th:text="${post.idx}"></td>
+        <td class="post-title" th:text="${post.title}"></td>
+        <td class="post-writer" th:text="${post.writer}"></td>
+        <td class="post-write-time" th:text="${post.write_time}"></td>
+    </tr>
 </body>
 </html>
