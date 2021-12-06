@@ -8,14 +8,13 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
 
-        function insert(form) {
-            var result = (
-                       isValid(form.title, "제목", null, null)
-                    && isValid(form.writer, "이름", null, null)
-                    && isValid(form.content, "내용", null, null)
-            );
+        function insert() {
+            var title = document.getElementById("title").value
+            var writer = document.getElementById("writer").value
+            var content = document.getElementById("content").value
 
-            if ( result == false ) {
+            if (!title || !writer || !content) {
+                alert('빈칸을 입력해주세요.');
                 return false;
             }
         }
@@ -47,7 +46,7 @@
             padding: 16px 0 16px 0;
         }
 
-        #writer-input {
+        #writer {
             margin-left: auto;
             width: 300px;
         }
@@ -80,12 +79,12 @@
 </head>
 <body>
     <h3>게시글 작성하기</h3>
-    <form id="insert" method="get" onsubmit="return insert(this)" th:object="${post}" th:action="@{/write/fin}">
+    <form id="insert" method="get" onsubmit="return insert()" th:object="${post}" th:action="@{/write/fin}">
         <input type="hidden" th:if="*{idx != null and idx > 0}" th:field="*{idx}">
         <div>
-            <input id="title-input" type="text" name="title" placeholder="제목" th:field="*{title}">
-            <textarea name="content" placeholder="게시글을 입력하세요." th:field="*{content}"></textarea>
-            <input id="writer-input" name="writer" placeholder="작성자" th:field="*{writer}">
+            <input id="title" type="text" name="title" placeholder="제목" th:field="*{title}">
+            <textarea id="content" name="content" placeholder="게시글을 입력하세요." th:field="*{content}"></textarea>
+            <input id="writer" name="writer" placeholder="작성자" th:field="*{writer}">
             <button class="main-button" type="submit">작성하기</button>
         </div>
     </form>

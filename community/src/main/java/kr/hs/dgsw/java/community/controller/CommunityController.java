@@ -52,8 +52,6 @@ public class CommunityController {
 
     @RequestMapping("/write/fin")
     public String writeFinish(Post post) {
-        System.out.println(post.getIdx());
-
         Calendar cal = Calendar.getInstance();
         java.sql.Date writeDate = new java.sql.Date(cal.getTimeInMillis());
 
